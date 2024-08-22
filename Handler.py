@@ -14,7 +14,7 @@ class Handler:
                 database=database,
             )
             self.cursor = self.connection.cursor()
-        except:
+        except mysql.connector.errors.ProgrammingError:
             print("ERROR: Please double check the credentials and the database name.")
         else:
             self.cursor.execute("show tables;")
