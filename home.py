@@ -1,13 +1,14 @@
 from . import Handler
+from flask import current_app, render_template
 
 
-def serve_home(app):
-    db_handle = Handler.Handler(app.config["MYSQL_CREDS"], database="greenbasket_eshop")
-    table_data = db_handle.GetTableData("vegFruit")
-    db_handle.close()
+db_handle = Handler.Handler(
+    current_app.config["MYSQL_CREDS"], database="greenbasket_eshop"
+)
+table_data = db_handle.GetTableData("vegFruit")
+db_handle.close()
 
-    @app.route("/")
-    def home():
-        return f"{table_data['col_headers'][0]}"
 
-    return home
+@current_app.route("/")
+def home():
+    return render_template("home.html", data=table_data)

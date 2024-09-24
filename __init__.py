@@ -26,6 +26,6 @@ def create_app(test_config=None):
 
         from . import home
 
-        home.serve_home(app)
+        home.home()
 
         return app
