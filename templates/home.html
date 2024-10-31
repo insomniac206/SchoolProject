@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="../static/home.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="card-container">
+      {% for i in range(data['cols']) %}
+      <div class="grocery-card">
+        <img
+          src="https://www.farmersalmanac.com/wp-content/uploads/2020/11/Adocortland_apples-as225320764.jpeg"
+          alt="apple"
+        />
+        <div class="card-details">
+          <div class="item-name">{{ data[i][1] }}</div>
+          <div class="item-price">{{ data[i][2] }}/kg</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
