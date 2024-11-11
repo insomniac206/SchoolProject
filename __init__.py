@@ -25,7 +25,17 @@ def create_app(test_config=None):
     with app.app_context():
 
         from . import home
+        from . import Vegetables
+        from . import Bakery
+        from . import SelfCare
+        from . import Stationary
+        from . import DPM
 
         home.home()
+        Vegetables.veggies()
+        Bakery.Bakery()
+        SelfCare.SelfCare()
+        Stationary.Stationary()
+        DPM.DPM()
 
         return app
