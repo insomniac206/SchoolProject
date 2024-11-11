@@ -44,6 +44,7 @@ class Handler:
         data["cols"] = len(
             result[0]
         )  # first element of  result contains all the table headers
+        data["rows"] = len(result)
 
         for i in range(len(result)):
             data[i] = list(result[i])
