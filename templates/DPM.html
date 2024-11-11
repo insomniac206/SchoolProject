@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GreenCart - Dairy, Poultry and Meat</title>
+    <link href="../static/all.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="header">GreenCart</div>
+    <div class="card-container">
+      {% for i in range(data['cols']) %}
+      <div class="grocery-card">
+        <img src={{ data[i][4] }} alt={{ data[i][1] }} />
+        <div class="card-details">
+          <div class="item-name">{{ data[i][1] }}</div>
+          <div class="item-price">{{ data[i][2] }}/kg</div>
+          <button class="button">Add</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <script src="../static/all.js"></script>
+  </body>
+</html>
