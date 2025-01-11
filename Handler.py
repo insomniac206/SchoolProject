@@ -18,6 +18,24 @@ class Handler:
             self.cursor.execute("show tables;")
             self.tables = [table for table in self.cursor.fetchall()]
 
+    def CreateTable(self, table: str, schema: dict) -> None:
+        table_schema = ", ".join(
+            [f"{header} {schema[header]}" for header in schema.keys()]
+        )
+
+        self.cursor.execute(f"CREATE TABLE {table}({table_schema})")
+        self.connection.commit()
+
+        print(f"Succesfully created {table}.")
+
+    def InsertValues(self, table: str, values: list) -> None:
+        i_vals = ", ".join(values)
+
+        self.cursor.execute(f"INSERT INTO {table} VALUES ({i_vals})")
+        self.connection.commit()
+
+        print(f"Successfully inserted values into {table}")
+
     def GetTableData(self, table: str) -> dict:
         """
         returns a dictionary containing all the data in the
@@ -53,6 +71,36 @@ class Handler:
         data["col_headers"] = [element[0] for element in self.cursor.fetchall()]
 
         return data
+
+    def UpdateTableData(self, table: str, updates: dict, condition: str) -> None:
+        """
+        Updates specific fields in a table.
+        :param table: Table name
+        :param updates: Dictionary of column-value pairs to update
+        :param condition: SQL WHERE condition to identify rows
+        """
+        update_string = ", ".join([f"{col} = {updates[col]}" for col in updates.keys()])
+        sql_query = f"UPDATE {table} SET {update_string} WHERE {condition};"
+        try:
+            self.cursor.execute(sql_query, tuple(updates.values()))
+            self.connection.commit()
+            print(f"Successfully updated rows in {table}.")
+        except mysql.connector.Error as e:
+            print(f"Error updating data: {e}")
+
+    def DeleteTableData(self, table: str, condition: str) -> None:
+        """
+        Deletes rows from a table.
+        :param table: Table name
+        :param condition: SQL WHERE condition to identify rows
+        """
+        sql_query = f"DELETE FROM {table} WHERE {condition};"
+        try:
+            self.cursor.execute(sql_query)
+            self.connection.commit()
+            print(f"Successfully deleted rows from {table}.")
+        except mysql.connector.Error as e:
+            print(f"Error deleting data: {e}")
 
     def close(self) -> None:
         self.connection.close()
