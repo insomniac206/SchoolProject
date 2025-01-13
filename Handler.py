@@ -23,35 +23,30 @@ class Handler:
             [f"{header} {schema[header]}" for header in schema.keys()]
         )
 
-        self.cursor.execute(f"CREATE TABLE {table}({table_schema})")
-        self.connection.commit()
+        try:
+            self.cursor.execute(f"CREATE TABLE {table}({table_schema})")
+            self.connection.commit()
+            print(f"Succesfully created {table}.")
 
-        print(f"Succesfully created {table}.")
+        except mysql.connector.Error as e:
+            print(f"Error creating the table {table}: {e}")
 
     def InsertValues(self, table: str, values: list) -> None:
         i_vals = ", ".join(values)
 
-        self.cursor.execute(f"INSERT INTO {table} VALUES ({i_vals})")
-        self.connection.commit()
+        try:
+            self.cursor.execute(f"INSERT INTO {table} VALUES ({i_vals})")
+            self.connection.commit()
+            print(f"Successfully inserted values into {table}")
 
-        print(f"Successfully inserted values into {table}")
+        except mysql.connector.Error as e:
+            print(f"Error inserting values into {table}: {e}")
 
     def GetTableData(self, table: str) -> dict:
         """
         returns a dictionary containing all the data in the
         given table including the data in each row and
         the number of columns
-
-        rows are keyed with their index (ie, 1, 2, 3 for the 1st, 2nd, 3rd row and so on)
-        returns a dictionary that looks something like this:
-        {
-            'cols': <number of columns in the table>,
-            'col_headers': [list of all the column headers],
-            1: row 1,
-            2: row 2,
-            3: row 3,
-            ...
-        }
         """
 
         data = {}
