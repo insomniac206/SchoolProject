@@ -1,0 +1,55 @@
+body {
+  overflow-x: hidden;
+}
+
+table {
+  width: 100%;
+  border: 3px solid rgb(150, 150, 150);
+  border-radius: 5px;
+  text-align: center;
+  border-collapse: collapse;
+  transform: translateY(100px);
+}
+
+td,
+th {
+  border: 1px solid rgb(150, 150, 150);
+  padding: 10px;
+  font-family: "Consolas";
+}
+
+th {
+  background-color: rgb(120, 210, 50);
+}
+
+.header {
+  background-color: rgb(135, 220, 120);
+  position: absolute;
+  width: 100%;
+  font-size: xx-large;
+  text-align: center;
+  padding: 20px;
+  z-index: 100;
+  margin-top: 0;
+  font-family: "Lucida console";
+}
+
+form {
+  padding-top: 15px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgb(120, 210, 50);
+  color: white;
+  font-family: "Consolas";
+  font-weight: bold;
+  font-size: large;
+  border: none;
+  transform: translateY(120px);
+}
+
+button:hover {
+  cursor: pointer;
+}

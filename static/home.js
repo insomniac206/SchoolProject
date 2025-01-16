@@ -4,6 +4,8 @@ const dict = {
   "Baked Goods and Snacks": "Bakery",
   Stationery: "Stationery",
   "Self Care": "SelfCare",
+  Cart: "view-cart",
+  "View Orders": "orders",
 };
 
 const aisles = document.getElementsByClassName("Aisle");

@@ -11,8 +11,8 @@
     <div class="list-container">
       {% for i in range(data['rows']) %}
       <div class="Aisle">
-        <h2>{{ data[i][1] }}</h2>
-        <p>Aisle {{ i+1 }}</p>
+        <h2>{{ data[i|string][1] }}</h2>
+        <p>Aisle {{ (i+1)|string }}</p>
       </div>
       {% endfor %}
     </div>

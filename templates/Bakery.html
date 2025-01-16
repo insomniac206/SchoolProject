@@ -11,10 +11,10 @@
     <div class="card-container">
       {% for i in range(data['cols']) %}
       <div class="grocery-card">
-        <img src={{ data[i][4] }} alt={{ data[i][1] }} />
+        <img src={{ data[i|string][4] }} alt={{ data[i|string][1] }} />
         <div class="card-details">
-          <div class="item-name">{{ data[i][1] }}</div>
-          <div class="item-price">{{ data[i][2] }}/kg</div>
+          <div class="item-name">{{ data[i|string][1] }}</div>
+          <div class="item-price">{{ data[i|string][2] }}/kg</div>
           <button class="button">Add</button>
         </div>
       </div>

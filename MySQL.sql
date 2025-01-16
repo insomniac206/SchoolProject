@@ -47,3 +47,5 @@ INSERT INTO SelfCare VALUES(3, "Shaving Cream", 30, 5, 'https://external-content
 INSERT INTO SelfCare VALUES(4, "Facewash", 20, 5, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.u9Y_ZcromPB18KU1kJMoQwHaJ4%26pid%3DApi&f=1&ipt=e315093d3bbc66bf4f4f2caf1dea8875bb37d0a7da4dbfd76f6bccfa9d3e55c0&ipo=images');
 INSERT INTO SelfCare VALUES(5, "Deodorant", 180, 5, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.ybuFbFwJq0QrVrvxi3LoZwHaHa%26pid%3DApi&f=1&ipt=797377123a058e47ceaaf82e987498dceaaf5a505b8590da96e53192c4c6454d&ipo=images');
 ALTER TABLE SelfCare ADD FOREIGN KEY(AisleNo) REFERENCES MasterTable(AisleNo);
+
+CREATE TABLE PendingOrders(UserID int PRIMARY KEY, BillNo int);

@@ -1,11 +1,12 @@
 import os
-from flask import Flask
+from flask import Flask, request
 
 
 def create_app(test_config=None):
 
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(SECRET_KEY="development")
+    app.secret_key = "babooga"
+    # app.config.from_mapping(SECRET_KEY="development")
     app.config["MYSQL_CREDS"] = {
         "user": "root",
         "host": "localhost",
@@ -22,6 +23,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from .GetData import data_get
+
+    app.register_blueprint(data_get)
+
     with app.app_context():
 
         from . import home
@@ -30,6 +35,9 @@ def create_app(test_config=None):
         from . import SelfCare
         from . import Stationary
         from . import DPM
+        from . import Cart
+
+        from . import Orders
 
         home.home()
         Vegetables.veggies()
@@ -37,5 +45,9 @@ def create_app(test_config=None):
         SelfCare.SelfCare()
         Stationary.Stationary()
         DPM.DPM()
+        Cart.ViewCart()
+
+        Orders.orders()
+        Orders.cancel_order()
 
         return app

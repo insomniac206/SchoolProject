@@ -54,18 +54,21 @@ class Handler:
         self.cursor.execute(f"select * from {table};")
         result = self.cursor.fetchall()
 
-        data["cols"] = len(
-            result[0]
-        )  # first element of  result contains all the table headers
-        data["rows"] = len(result)
+        if result:
+            data["cols"] = len(
+                result[0]
+            )  # first element of  result contains all the table headers
+            data["rows"] = len(result)
 
-        for i in range(len(result)):
-            data[i] = list(result[i])
+            for i in range(len(result)):
+                data[str(i)] = list(result[i])
 
-        self.cursor.execute(f"desc {table};")
-        data["col_headers"] = [element[0] for element in self.cursor.fetchall()]
+            self.cursor.execute(f"desc {table};")
+            data["col_headers"] = [element[0] for element in self.cursor.fetchall()]
 
-        return data
+            return data
+        else:
+            return {}
 
     def UpdateTableData(self, table: str, updates: dict, condition: str) -> None:
         """

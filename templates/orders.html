@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View orders</title>
+    <link rel="stylesheet" type="text/css" href="../static/orders.css" />
+  </head>
+  <body>
+    <div class="header">GreenCart</div>
+    <div class="table-container">
+      {% if data %} {% for i in range(data["rows"]) %}
+      <h1 style="font-family: Consolas">Bill No.{{ data[i|string][0] }}</h1>
+      <table>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer Name</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td>{{ data[i|string][0] }}</td>
+          <td>{{ data[i|string][1] }}</td>
+          <td>{{ data[i|string][2] }}</td>
+          <td>{{ data[i|string][3] }}</td>
+          <td>{{ data[i|string][4] }}</td>
+        </tr>
+      </table>
+      <form action="/cancel_order?BillNo={{ data[i|string][0] }}" method="post">
+        <button type="submit">Cancel Order</button>
+      </form>
+      {% endfor %} {% endif %}
+    </div>
+  </body>
+</html>
